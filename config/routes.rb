@@ -20,7 +20,6 @@ Ptls::Application.routes.draw do
   # Niceities
   match 'login', :to => 'sessions#new'
   match 'logout', :to => 'sessions#destroy'
-end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
