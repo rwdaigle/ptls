@@ -1,6 +1,5 @@
-# Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  
+ 
   # Set the title for the page
   def page_title(page_title)
     content_for(:page_title, page_title)
