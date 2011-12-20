@@ -1,0 +1,6 @@
+- content_for(:page_title) do
+  = "Available Subjects"
+  
+%ul#subjects
+  - @subjects.each do |subject|
+    %li= link_to subject, subject

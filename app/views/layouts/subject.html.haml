@@ -1,0 +1,57 @@
+!!! Strict
+%html{:xmlns=>"http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content=>"text/html; charset=utf-8", "http-equiv"=>"Content-Type"}/
+    %title= yield(:title) || "PTLS Learning System"
+    = javascript_include_tag "jquery", "hotkeys", "hooks", "prototype", "hints", :cache => "cache/all"
+    = stylesheet_link_tag "reset", "layout", "subject", "unit", :cache => "cache/all"
+  %body    
+    #page_wrapper
+      #page
+      
+        #header_wrapper
+          #header
+            %h1
+              %a{:href => subjects_path}= @subject
+            #navigation_wrapper
+              #navigation
+                %ul
+                  %li
+                    %a{:href => (@subject ? subject_path(@subject) : subjects_path), :key => 'q'} Today's material
+                  - if @subject
+                    %li
+                      %a{:href => quiz_subject_path(@subject)} Pop Quiz
+                  %li
+                    %a{:href => edit_user_path(current_user)} Account settings
+                  %li
+                    = link_to("Logout", session_path, :method => :delete)
+                    
+        #main_wrapper
+          #main
+            - if not yield(:page_title).nil?
+              %h2= yield(:page_title)
+              
+            - if messages?
+              #message_wrapper
+                = messages
+            
+            #content_wrapper              
+              #content
+                = yield
+            
+            - if not yield(:instructions).nil?
+              #instructions_wrapper
+                #instructions
+                  = yield :instructions
+
+            - if not yield(:callout).nil?
+              #callout_wrapper
+                #callout
+                  = yield :callout
+            
+            - if not yield(:shortcuts).nil?
+              #shortcuts_wrapper
+                #shortcuts
+                  = yield :shortcuts
+           
+        = render :partial => '/layouts/footer'

@@ -1,0 +1,65 @@
+#subject_actions p {
+  width: 16em;
+  height: 5em;
+  text-align: center;
+  margin-bottom: 1.2em; }
+#subject_actions p.first {
+  margin-top: 1em; }
+#subject_actions p.break {
+  height: 2em;
+  font-family: Georgia;
+  font-size: 1.1em;
+  color: #9B9687;
+  background-image: url('/images/subject_action_break.png');
+  background-repeat: no-repeat;
+  background-position: 3.6em .7em;
+  margin-bottom: 1em; }
+
+#instructions_wrapper, #callout_wrapper {
+  width: 22em;
+  margin-top: 3em;
+  margin-left: 8em;
+  padding-right: 3em;
+  padding-left: 3em;
+  padding-bottom: 1em;
+  float: left;
+  font-family: "Lucida Grande",Verdana,Geneva,Arial,Helvetica,sans-serif;
+  font-size: .8em;
+  color: #837D6B;
+  letter-spacing: .1em;
+  line-height: 1.5em; }
+
+#instructions_wrapper, #instructions_wrapper * {
+  background-color: #F8F3F0; }
+
+#callout_wrapper, #callout_wrapper * {
+  background-color: #F4F3F2; }
+
+#instructions, #callout {
+  margin-top: 2em;
+  min-height: 18em; }
+  #instructions p,   #callout p {
+    margin-left: 1em;
+    padding-left: 2em;
+    padding-bottom: 2em; }
+  #instructions a,   #callout a {
+    text-decoration: underline;
+    color: #C5B9A1; }
+
+#instructions {
+  background: url('/images/flag_instructions.png') top left no-repeat; }
+
+#callout h3 {
+  font-size: 1.2em;
+  font-weight: normal;
+  padding-bottom: 1em; }
+#callout p.highlight {
+  background: url('/images/callout_star.png') top left no-repeat; }
+#callout em {
+  font-style: normal;
+  color: #48453C; }
+#callout a.swap {
+  text-decoration: none;
+  clear: both;
+  float: right;
+  font-size: .9em; }

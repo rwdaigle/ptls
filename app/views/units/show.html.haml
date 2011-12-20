@@ -1,0 +1,5 @@
+= "#{@unit.question} -> #{@unit.answer}"
+
+%p
+  = link_to 'all questions', subject_path(@subject)
+  = link_to 'add another question', new_subject_unit_path(@subject)

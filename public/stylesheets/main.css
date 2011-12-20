@@ -1,0 +1,22 @@
+#unit {
+  margin-left: 75px;
+  font-family: Georgia;
+  font-size: 5em; }
+  #unit #answer {
+    margin-top: 40px;
+    margin-left: 100px; }
+
+#unit_actions {
+  margin-left: 75px;
+  margin-top: 100px;
+  font-family: Arial;
+  font-size: 2em; }
+  #unit_actions .action {
+    margin-left: 40px;
+    margin-right: 40px; }
+
+#progress {
+  margin-left: 75px;
+  margin-top: 50px;
+  font-family: Arial;
+  font-size: .75em; }

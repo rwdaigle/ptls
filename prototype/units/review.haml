@@ -1,0 +1,31 @@
+#question
+  %p
+    Who was the first president of the United States of America, born in the year seventeen hundred and thirty two?
+
+#answer_wrapper
+  #answer.hidden
+    %p
+      George Washington was the first president of the United States of America, born in 1732
+    %ul.unit_actions
+      %li
+        %a{:href => '#'}
+          %img{:src => '/public/images/success.png'}
+          Got it!
+      %li
+        %a{:href => '#'}
+          %img{:src => '/public/images/cancel.png'}
+          Missed it
+  %p.tab
+    %a.showAnswer{:href => '#'}
+      %img{:src => '/public/images/show.png'} Show answer
+    %a.hideAnswer.hidden{:href => '#'}
+      %img{:src => '/public/images/hide.png'} Hide answer
+
+- content_for :shortcuts do
+  %h4 Keyboard shortcuts:
+  %ul
+    %li Show answer: 's'
+    %li Got it: 'g'
+    %li Missed it: 'm'
+    %li Hide answer: 'h'
+    %li Quit: 'q'

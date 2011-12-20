@@ -1,0 +1,2 @@
+page.replace_html :question_content, :partial => 'units/show_question', :locals => { :unit => @unit }
+page.replace_html :answer_content, :partial => 'units/show_answer', :locals => { :unit => @unit }

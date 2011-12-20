@@ -1,0 +1,3 @@
+# Update unit question portion if it's been changed
+page.replace_html :unit_question, :partial => 'units/question', :locals => { :unit => @unit }
+page.replace_html :unit_answer, :partial => 'units/answer', :locals => { :unit => @unit }
