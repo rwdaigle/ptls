@@ -14,23 +14,23 @@ class Unit < ActiveRecord::Base
   
   # Get the units that have not yet been learned by this user.
   # Replaces old named scope which used inefficient "IN" condition
-  # named_scope :not_learned_by, lambda { |user| {:conditions => ["units.id not in (select unit_id from learnings where learnings.user_id = ?)", user.id]}}
-  named_scope :not_learned_by, lambda { |user|
+  # scope :not_learned_by, lambda { |user| {:conditions => ["units.id not in (select unit_id from learnings where learnings.user_id = ?)", user.id]}}
+  scope :not_learned_by, lambda { |user|
     { :joins => "LEFT JOIN learnings ON units.id = learnings.unit_id AND learnings.user_id = #{user.id}",
       :conditions => "learnings.unit_id IS NULL",
       :order => 'units.position' }
   }
   
-  named_scope :learned_by, lambda { |user|
+  scope :learned_by, lambda { |user|
     { :joins => "LEFT JOIN learnings ON units.id = learnings.unit_id AND learnings.deferred = 0 AND learnings.user_id = #{user.id}",
       :conditions => "learnings.unit_id IS NOT NULL" }
   }
   
-  named_scope :empty, :conditions => ["answer IS NULL OR answer = ''"]
+  scope :empty, :conditions => ["answer IS NULL OR answer = ''"]
   
   # Get units in random order in a repeateable way (hence the seed)
-  named_scope :random, lambda { |seed| { :order => "RAND(#{seed || 1})" } }
-  named_scope :ordered, { :order => 'units.position' }
+  scope :random, lambda { |seed| { :order => "RAND(#{seed || 1})" } }
+  scope :ordered, { :order => 'units.position' }
 
   class << self
 

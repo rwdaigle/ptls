@@ -10,14 +10,14 @@ class Review < ActiveRecord::Base
   belongs_to :unit, :include => :subject
   
   # Named scopes
-  # TODO: Fix need for 'clean' on for named_scope
-  named_scope :for, lambda { |subject| {:conditions => "units.subject_id = #{subject.id}", :joins => "LEFT JOIN units ON units.id = unit_id"}}
-  named_scope :today, lambda { { :conditions => ['scheduled_at <= ?', Time.zone.now.end_of_day], :order => 'reviews.created_at ASC' }}
-  named_scope :reviewed_today, lambda { { :conditions => ['reviewed = ? and reviewed_at >= ? and reviewed_at <= ?', true, Time.zone.now.beginning_of_day, Time.zone.now.end_of_day], :order => 'reviews.created_at ASC, reviews.id ASC' }}
-  named_scope :left, :conditions => { :reviewed => false }, :order => 'reviews.scheduled_at ASC'
-  named_scope :reviewed, :conditions => { :reviewed => true }
-  named_scope :successful, :conditions => { :success => true }
-  named_scope :failed, :conditions => { :success => false }
+  # TODO: Fix need for 'clean' on for scope
+  scope :for, lambda { |subject| {:conditions => "units.subject_id = #{subject.id}", :joins => "LEFT JOIN units ON units.id = unit_id"}}
+  scope :today, lambda { { :conditions => ['scheduled_at <= ?', Time.zone.now.end_of_day], :order => 'reviews.created_at ASC' }}
+  scope :reviewed_today, lambda { { :conditions => ['reviewed = ? and reviewed_at >= ? and reviewed_at <= ?', true, Time.zone.now.beginning_of_day, Time.zone.now.end_of_day], :order => 'reviews.created_at ASC, reviews.id ASC' }}
+  scope :left, :conditions => { :reviewed => false }, :order => 'reviews.scheduled_at ASC'
+  scope :reviewed, :conditions => { :reviewed => true }
+  scope :successful, :conditions => { :success => true }
+  scope :failed, :conditions => { :success => false }
   
   # Lifecycle callbacks
   before_update :update_reviewed_at
@@ -35,7 +35,7 @@ class Review < ActiveRecord::Base
     end
         
     # Leave out any joined columns (useful when chaining "for")
-    # TODO: eliminate need for this (on 'for' named_scope)
+    # TODO: eliminate need for this (on 'for' scope)
     def clean(scope = :all, opts = {})
       find(scope, {:select => 'reviews.*'}.merge(opts))
     end

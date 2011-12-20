@@ -9,5 +9,5 @@ class Association < ActiveRecord::Base
   belongs_to :unit
   
   # Basic named scopes
-  named_scope :for, lambda { |unit| { :conditions => { :unit_id => unit.id }} }
+  scope :for, lambda { |unit| { :conditions => { :unit_id => unit.id }} }
 end

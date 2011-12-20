@@ -3,7 +3,7 @@ require 'csv'
 class Subject < ActiveRecord::Base  
   
   validates_presence_of :name, :from, :permalink, :to
-  has_many :units  # Ordering done by Unit.ordered named_scope
+  has_many :units  # Ordering done by Unit.ordered scope
   has_many :reviews, :through => :units, :source => :reviews
   belongs_to :owner, :class_name => 'User'
   
