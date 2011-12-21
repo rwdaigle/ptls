@@ -1,2 +1,0 @@
-page.replace_html :question_content, :partial => 'edit_question', :locals => { :unit => @unit }
-page[:unit_question].select
