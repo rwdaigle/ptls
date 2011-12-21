@@ -1,10 +1,10 @@
-require 'authentication/restful'
+# require 'authentication/restful'
 require 'ptls/learning'
 require 'ptls/reviewing'
 
 class User < ActiveRecord::Base
   
-  include Authentication::Restful
+  # include Authentication::Restful
   include Ptls::User::Learning
   include Ptls::User::Reviewing
   

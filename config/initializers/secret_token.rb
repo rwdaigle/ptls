@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Ptls::Application.config.secret_token = ENV['SESSION_SECRET'] || 'not in production'
+Ptls::Application.config.secret_token = ENV['SESSION_SECRET'] || '6dc6508d30fafq26ac30656asd22bfb0650f6f68b'
