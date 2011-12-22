@@ -1,28 +1,9 @@
-var express = require('express');
-var pg = require('pg');
+var express = require('express'),
+  resource = require('express-resource'),
+  app = express.createServer(express.logger());
 
-var app = express.createServer(express.logger());
-app.set('view engine', 'jade');
+app.resource('units', require('./controllers/unit'));
 
-app.get('/', function(req, res) {
-	pg.connect(process.env.DATABASE_URL, function(err, client) {
-
-    var query = client.query('SELECT * FROM units ORDER BY ID LIMIT 20', function(err, result) {
-      res.render('items', { items: result.rows });
-    });
-
-    // query.on('row', function(row) {
-    //   console.log("Found result row for unit: " + row.id);
-    //   res.write(row.id + ": " + row.question + " - " + row.answer + "<br/>");
-    // });
-
-    // query.on('end', function() {
-    //   res.end();
-    // })
-  });
-});
-
-var port = process.env.PORT || 3000;
-app.listen(port, function() {
-  console.log("Listening on " + port);
+app.listen(process.env.PORT || 3000, function() {
+  console.log("PTLS web process started");
 });
