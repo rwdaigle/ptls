@@ -3,8 +3,6 @@
   "version": "0.0.2",
   "dependencies": {
     "express": "latest",
-    "express-resource": "latest",
-    "pg": "latest",
-    "jade": "latest"
+    "pg": "latest"
   }
 }

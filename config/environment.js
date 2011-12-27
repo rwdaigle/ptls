@@ -2,7 +2,9 @@ module.exports = function(app, express) {
 
 	app.configure(function() {
 		app.use(express.logger({ format: ':method :url :status in :response-time ms' }));
+		app.use(express.static(__dirname + '/public'));
 		app.use(express.bodyParser());
+		// app.use(express.session({ secret: process.env.SESSION_SECRET }));
 	});
 
     app.configure('development', 'test', 'staging', function() {
