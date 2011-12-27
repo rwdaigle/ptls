@@ -6,3 +6,7 @@ exports.find = function(id, fn) {
     err ? fn(err, null) : fn(null, result.rows[0]);
   });
 };
+
+exports.default = function(req, res){
+ 	res.send('Unsupported format "' + req.format + '". Only JSON is supported, please append ".json" to the request.', 406);
+ };

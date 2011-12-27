@@ -1,3 +1,5 @@
-exports.show = function(req, res) {
- 	res.send(req.unit);
+exports.show = {
+	json: function(req, res) {
+ 		res.send(req.unit);
+ 	}
 };
