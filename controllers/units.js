@@ -1,3 +1,3 @@
 exports.show = function(req, res) {
- 	res.send(req.model);
+ 	res.send(req.unit);
 };
