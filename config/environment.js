@@ -5,7 +5,9 @@ module.exports = function(app, express) {
 		app.use(express.static(__dirname + '/public'));
 		app.use(express.bodyParser());
 		app.use(express.cookieParser());
-		app.use(require('cookie-sessions')({ secret: process.env.SESSION_SECRET }));
+		app.use(require('connect-cookie-session')({ secret: process.env.SESSION_SECRET }));
+		// app.use(express.session({ secret: process.env.SESSION_SECRET }));
+		app.use(app.router);
 	});
 
     app.configure('development', 'test', 'staging', function() {

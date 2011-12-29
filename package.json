@@ -4,6 +4,7 @@
   "dependencies": {
     "express": "latest",
     "pg": "latest",
-    "cookie-sessions": "latest"
+    "cookie-sessions": "latest",
+    "connect-cookie-session": "latest"
   }
 }
