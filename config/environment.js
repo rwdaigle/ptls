@@ -4,7 +4,8 @@ module.exports = function(app, express) {
 		app.use(express.logger({ format: ':method :url :status in :response-time ms' }));
 		app.use(express.static(__dirname + '/public'));
 		app.use(express.bodyParser());
-		// app.use(express.session({ secret: process.env.SESSION_SECRET }));
+		app.use(express.cookieParser());
+		app.use(require('cookie-sessions')({ secret: process.env.SESSION_SECRET }));
 	});
 
     app.configure('development', 'test', 'staging', function() {

@@ -5,9 +5,6 @@ module.exports = function(app) {
 	// Units
 	var unitsController = require('../controllers/units'),
 		Unit = require('../models/unit');
-
 	app.param('unitId', models.bind('unit', Unit.load));
-
 	app.get('/units/:unitId.:format?', unitsController.show);
-	// , models.setModel('unitId', unit.load)
 }

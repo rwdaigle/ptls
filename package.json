@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "dependencies": {
     "express": "latest",
-    "pg": "latest"
+    "pg": "latest",
+    "cookie-sessions": "latest"
   }
 }
