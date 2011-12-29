@@ -7,4 +7,5 @@ module.exports = function(app) {
 		Unit = require('../models/unit');
 	app.param('unitId', models.bind('unit', Unit.load));
 	app.get('/units/:unitId.:format?', unitsController.show);
+	app.get('/units.:format?', unitsController.index);
 }

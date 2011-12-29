@@ -6,3 +6,10 @@ exports.load = function(id, fn) {
     err ? fn(err, null) : fn(null, result.rows[0]);
   });
 };
+
+exports.all = function(limit, fn) {
+  console.log("Loading " + limit + " units");
+  var query = db.query('SELECT * FROM units LIMIT $1', [limit], function(err, result) {
+    err ? fn(err, null) : fn(null, result.rows);
+  });
+};
