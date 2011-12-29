@@ -18,7 +18,7 @@ module.exports = function(app, express) {
     });
 
     app.configure('production', function() {
-    	app.use(express.errorHandler());
+	    app.use(express.errorHandler());
     });
 
 	app.listen(process.env.PORT || 3000, function() {
