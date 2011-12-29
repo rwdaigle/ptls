@@ -1,6 +1,6 @@
 module.exports = function(app) {
 
-	var models = require('../helpers/models');
+	var models = require('../filters/models');
 
 	// Units
 	var unitsController = require('../controllers/units'),
