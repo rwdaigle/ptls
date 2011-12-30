@@ -6,5 +6,10 @@
     "pg": "latest",
     "connect-cookie-session": "latest",
     "migrate": "latest"
+  },
+  "devDependencies": {
+    "should": "latest",
+    "vows": "latest",
+    "zombie": "latest"
   }
 }

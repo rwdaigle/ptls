@@ -36,6 +36,6 @@ exports.requireAuthenticatedUser = function(req, res, next) {
 	if(req.authenticatedUser) {
 		next();
 	} else {
-		throw new Error("Unauthorized access to protected resource");
+		res.send('Unauthorized access to protected resource', 401);
 	}
 }
