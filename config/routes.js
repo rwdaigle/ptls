@@ -2,7 +2,7 @@ module.exports = function(app) {
 
 	// var models = require('../filters/models');
 	var auth = require('../middleware/auth');
-	var authenticationRequiredStack = [auth.loadAuthenticatedUser];
+	var authenticationRequiredStack = [auth.loadTokenizedUser, auth.loadAuthenticatedUser, auth.requireAuthenticatedUser];
 
 	// Units
 	var unitsController = require('../controllers/units');

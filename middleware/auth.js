@@ -1,9 +1,8 @@
 var User = require('../models/user');
 
-exports.loadAuthenticatedUser = function(req, res, next) {
-	var userId = req.session.userId;
-	if(userId) {
-		User.load(userId, function(err, user) {
+var bindUser = function(req, key, load, next) {
+	if(!req.authenticatedUser && key) {
+		load(key, function(err, user) {
 			req.authenticatedUser = user ? user : null;
 			next();
 		});
@@ -12,14 +11,31 @@ exports.loadAuthenticatedUser = function(req, res, next) {
 	}
 }
 
+// From http://stackoverflow.com/questions/5951552/basic-http-authentication-in-node-js
+var basicAuthentication = function(req, callback) {
+	var header = req.headers['authorization'] || '',
+		token = header.split(/\s+/).pop() || '',
+		auth = new Buffer(token, 'base64').toString(),
+		parts = auth.split(/:/),
+		username = parts[0],
+		password = parts[1];
+	callback(username, password);
+}
+
+exports.loadAuthenticatedUser = function(req, res, next) {
+	bindUser(req, req.session.userId, User.load, next);
+}
+
 exports.loadTokenizedUser = function(req, res, next) {
-	var token = req.param('token');
-	if(token) {
-		User.loadFromToken(token, function(err, user) {
-			req.authenticatedUser = user ? user : null;
-			next();
-		});
-	} else {
+	basicAuthentication(req, function(username, password) {
+		bindUser(req, username || req.param('token'), User.loadFromToken, next);
+	});	
+}
+
+exports.requireAuthenticatedUser = function(req, res, next) {
+	if(req.authenticatedUser) {
 		next();
+	} else {
+		throw new Error("Unauthorized access to protected resource");
 	}
 }

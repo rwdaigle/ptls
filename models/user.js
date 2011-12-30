@@ -7,6 +7,6 @@ exports.load = function(id, fn) {
 };
 
 exports.loadFromToken = function(token, fn) {
-  console.info("Loading user from token: " + token);
-  db.query('SELECT * FROM users WHERE token = $1', [id], results.first(fn));
+  console.info("Loading user from token");
+  db.query('SELECT * FROM users WHERE token = $1', [token], results.first(fn));
 };
