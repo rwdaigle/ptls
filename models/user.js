@@ -1,8 +1,12 @@
 var db = require('../config/db');
+var results = require('../lib/results');
 
 exports.load = function(id, fn) {
   console.info("Loading user id: " + id);
-  var query = db.query('SELECT * FROM users WHERE ID = $1', [id], function(err, result) {
-    err ? fn(err, null) : fn(null, result.rows[0]);
-  });
+  db.query('SELECT * FROM users WHERE ID = $1', [id], results.first(fn));
+};
+
+exports.loadFromToken = function(token, fn) {
+  console.info("Loading user from token: " + token);
+  db.query('SELECT * FROM users WHERE token = $1', [id], results.first(fn));
 };

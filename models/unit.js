@@ -1,15 +1,12 @@
 var db = require('../config/db');
+var results = require('../lib/results');
 
 exports.load = function(id, fn) {
   console.info("Loading unit id: " + id);
-  var query = db.query('SELECT * FROM units WHERE ID = $1', [id], function(err, result) {
-    err ? fn(err, null) : fn(null, result.rows[0]);
-  });
+  db.query('SELECT * FROM units WHERE ID = $1', [id], results.first(fn));
 };
 
 exports.all = function(limit, fn) {
   console.info("Loading " + limit + " units");
-  var query = db.query('SELECT * FROM units LIMIT $1', [limit], function(err, result) {
-    err ? fn(err, null) : fn(null, result.rows);
-  });
+  db.query('SELECT * FROM units LIMIT $1', [limit], results.all(fn));
 };
