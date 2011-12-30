@@ -2,16 +2,30 @@ var vows = require('vows'),
   assert = require('assert'),
   test = require('./test_helper');
 
-vows.describe('Unauthorized unit API requests').addBatch({
+exports.suite1 = vows.describe('Unit API').addBatch({
 
-  'to /units': {
-    topic: function() { test.browser.visit('/units', this.callback); },
-    'should respond with a 401': test.assertStatus(401)
-  },
+  'Unit API requests': {
+    'by an unauthorized user': {
 
-  // 'to /units/:id': {
-  //   topic: function() { browser.visit('/units', this.callback); },
-  //   'should respond with a 401': responseHelper.assertStatus(401)
-  // }
+      'to /units': {
+        topic: function() { test.browser.visit('/units', this.callback); },
+        'should respond with a 401': test.assertStatus(401)
+      },
 
-}).export(module);
+      'to /units/:id': {
+        topic: function() { test.browser.visit('/units/1', this.callback); },
+        'should respond with a 401': test.assertStatus(401)
+      }
+      
+    },
+
+    'by an authorized user': {
+
+      'to /units': {
+        topic: function() { test.browser.visit('/units', this.callback); },
+        'should respond with a 200': test.assertStatus(200)
+      }
+    }
+  }
+
+});
