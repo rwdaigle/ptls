@@ -1,4 +1,4 @@
-var User = require('../models/User');
+var User = require('../models/user');
 
 exports.loadAuthenticatedUser = function(req, res, next) {
 	var userId = req.session.userId;
