@@ -15,7 +15,7 @@ exports.loadFromToken = function(token, fn) {
 exports.create = function(login, password, email, fn) {
   console.info("Creating new user: " + email);
   generateCryptedPassword(email, password, function(salt, cryptedPassword) {
-    db.query("INSERT INTO users(login, crypted_password, salt, email) VALUES($1, $2, $3, $4, $5) RETURNING id", [login, cryptedPassword, salt, email], results.getIdOnCreate);
+    db.query("INSERT INTO users(login, crypted_password, salt, email) VALUES($1, $2, $3, $4) RETURNING login", [login, cryptedPassword, salt, email], results.getIdOnCreate(fn));
   });
 }
 

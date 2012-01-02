@@ -8,8 +8,8 @@
     "migrate": "latest"
   },
   "devDependencies": {
-    "should": "latest",
     "vows": "latest",
-    "zombie": "latest"
+    "zombie": "latest",
+    "Faker": "latest"
   }
 }
