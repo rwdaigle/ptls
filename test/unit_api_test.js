@@ -25,12 +25,28 @@ exports.suite1 = vows.describe('Unit API').addBatch({
 
     'by an authorized user': {
 
-      'to /units': {
-        setup: function() { console.log("Started") },
-        topic: function() { test.browser.visit('/units', this.callback); },
-        'should respond with a 200': test.assertStatus(200),
-        tearDown : function() { console.log("Done") }
-      }
+      topic: function() {
+        User.create(Faker.Internet.userName(), 'password', Faker.Internet.email(), this.callback);
+      },
+
+      'to /units?token=XYZ': {
+        topic: function(user) {
+          test.browser.visit('/units?token=' + user.token, this.callback);
+        },
+        'should respond with a 200': test.assertStatus(200)
+      },
+
+      'to /units/X?token=Y': {
+        topic: function(user) {
+          test.browser.visit('/units/2000?token=' + user.token, this.callback);
+        },
+        'should respond with a 200': test.assertStatus(200)
+      },
+
+      // Executes after every vow. We want to execute after suite (?)
+      // tearDown: function(user) {
+      //   User.destroy(user.id, function(err, theUser) { });
+      // }
     }
   }
 
