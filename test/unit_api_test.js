@@ -4,8 +4,6 @@ var vows = require('vows'),
   Faker = require ('Faker'),
   User = require('../models/user');
 
-// User.create(Faker.Internet.userName(), 'password', Faker.Internet.email(), function(key) { console.log(key); });
-
 exports.suite1 = vows.describe('Unit API').addBatch({
 
   'Unit API requests': {
@@ -43,10 +41,13 @@ exports.suite1 = vows.describe('Unit API').addBatch({
         'should respond with a 200': test.assertStatus(200)
       },
 
-      // Executes after every vow. We want to execute after suite (?)
-      // tearDown: function(user) {
-      //   User.destroy(user.id, function(err, theUser) { });
-      // }
+      // Executes before vows complete since their execution is asynchronous.
+      // TODO: Quite sure this isn't the right way to wait for vows to complete.
+      tearDown: function(user) {
+        setTimeout(50, function() {
+          User.destroy(user.id, function(err, theUser) { })
+        });
+      }
     }
   }
 
