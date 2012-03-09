@@ -4,15 +4,29 @@ Ptls::Application.routes.draw do
 
   resources :users
   resource :session
-  resources :reviews, :member => { :review => :put }, :collection => { :shift => :put }  
-  resources :learnings, :member => { :review => :put }  
+  resources :reviews do
+    put 'review', :on => :member
+    put 'shift', :on => :collection
+  end
+  resources :learnings do
+    put 'review', :on => :member
+  end
   resources :associations  
 
-  resources :units, :member => { :edit_question => :get, :edit_answer => :get } do
+  resources :units do
+    member do
+      get 'edit_question'
+      get 'edit_answer'
+    end
     resources :learnings
   end
   
-  resources :subjects, :member => { :learn => :get, :review => :get, :quiz => :get } do
+  resources :subjects do
+    member do
+      get 'learn'
+      get 'review'
+      get 'quiz'
+    end
     resources :learnings, :collection => { :today => :get }
     resources :reviews, :collection => { :missed => :get, :shift => :put }
   end
