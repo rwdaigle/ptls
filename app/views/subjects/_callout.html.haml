@@ -3,17 +3,17 @@
   #todays_progress
     %h3 Todays highlights
     %p.highlight
-      = todays_review_callout(@subject)
-      = review_shift_callout
-    %p.highlight= todays_learning_callout(@subject)
+      = raw(todays_review_callout(@subject))
+      = raw(review_shift_callout)
+    %p.highlight= raw(todays_learning_callout(@subject))
     %a.swap{:href => '#overall_progress', :from => '#todays_progress'} see overall highlights
     .clear
 
   #overall_progress.hidden
     %h3 Overall highlights
     - if current_user.started?(@subject)
-      %p.highlight= subject_progress(@subject)
+      %p.highlight= raw(subject_progress(@subject))
       - if current_user.reviewing_yet?(@subject)
-        %p.highlight= subject_retention(@subject)
+        %p.highlight= raw(subject_retention(@subject))
     %a.swap{:href => '#todays_progress', :from => '#overall_progress'} see today's highlights
     .clear

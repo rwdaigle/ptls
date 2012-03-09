@@ -7,14 +7,14 @@
     %ul.unit_actions
 
       %li.secondary
-        - form_for :learning, @learning, :url => unit_learnings_path(@unit), :html => { :confirm => "Are you sure you want to skip this item?  This will defer it indefinitely." } do |f|
+        = form_for @learning, :url => unit_learnings_path(@unit), :html => { :confirm => "Are you sure you want to skip this item?  This will defer it indefinitely." } do |f|
           = f.hidden_field :deferred, :value => true
           = f.hidden_field :unit_id
           = f.hidden_field :started_at, :value => Time.zone.now
           = image_submit_tag 'defer.png'
           
       %li
-        - form_for :learning, @learning, :url => unit_learnings_path(@unit), :html => { :key => 'n' } do |f|
+        = form_for @learning, :url => unit_learnings_path(@unit), :html => { :key => 'n' } do |f|
           = f.hidden_field :unit_id
           = f.hidden_field :started_at, :value => Time.zone.now
           = image_submit_tag 'next.png'

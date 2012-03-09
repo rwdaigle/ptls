@@ -39,17 +39,17 @@
               #content
                 = yield
             
-            - if not yield(:instructions).nil?
+            - if not yield(:instructions).empty?
               #instructions_wrapper
                 #instructions
                   = yield :instructions
 
-            - if not yield(:callout).nil?
+            - if not yield(:callout).empty?
               #callout_wrapper
                 #callout
                   = yield :callout
             
-            - if not yield(:shortcuts).nil?
+            - if not yield(:shortcuts).empty?
               #shortcuts_wrapper
                 #shortcuts
                   = yield :shortcuts
