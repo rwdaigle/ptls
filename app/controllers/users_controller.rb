@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  skip_before_filter :login_required
+  skip_before_filter :login_required, :only => [:new, :create]
   layout 'bare'
 
   # render new.rhtml

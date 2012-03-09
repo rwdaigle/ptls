@@ -6,6 +6,7 @@ gem 'will_paginate'
 gem 'permalink_fu'
 gem 'pg'
 gem 'make_resourceful'
+gem 'dynamic_form'
 
 gem 'haml'
 gem 'sass'

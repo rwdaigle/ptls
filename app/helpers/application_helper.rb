@@ -13,7 +13,7 @@ module ApplicationHelper
   end
   
   def messages?
-    flash.size > 0
+    !flash.empty?
   end
   
   # Print out this percentage
