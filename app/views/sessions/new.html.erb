@@ -1,6 +1,6 @@
 <% page_title('Login') %>
 
-<% form_tag session_path do -%>
+<%= form_tag session_path do %>
 
   <p><label for="login">Login</label><br/>
   <%= text_field_tag 'login' %></p>
@@ -9,7 +9,7 @@
   <%= password_field_tag 'password' %></p>
 
   <p><%= submit_tag 'Log in' %></p>
-<% end -%>
+<% end %>
 
 <p>
 <%= link_to('Register', new_user_path) %>

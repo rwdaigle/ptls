@@ -11,7 +11,7 @@
 %p
   %label Your timezone
   %br
-  = f.time_zone_select :time_zone, TimeZone.us_zones
+  = f.time_zone_select :time_zone, TZInfo::Timezone.us_zones
 
 %p
   %label How many words do you want to learn per day (no more than 20)?

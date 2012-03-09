@@ -16,10 +16,6 @@ class User < ActiveRecord::Base
                     :length     => { :within => 3..40 },
                     :format     => { :with => Authentication.login_regex, :message => Authentication.bad_login_message }
 
-  validates :name,  :format     => { :with => Authentication.name_regex, :message => Authentication.bad_name_message },
-                    :length     => { :maximum => 100 },
-                    :allow_nil  => true
-
   validates :email, :presence   => true,
                     :uniqueness => true,
                     :format     => { :with => Authentication.email_regex, :message => Authentication.bad_email_message },
@@ -32,7 +28,7 @@ class User < ActiveRecord::Base
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :name, :password, :password_confirmation
+  attr_accessible :login, :email, :time_zone, :daily_units, :password, :password_confirmation
 
   # Basic associations
   has_many :learnings
