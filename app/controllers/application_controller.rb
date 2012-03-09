@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
   
   # Assume we want the subject-relevant layout unless told otherwise
   layout 'subject'
+
+  def controller
+    @controller
+  end
   
   private
 

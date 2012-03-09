@@ -1,4 +1,4 @@
 - if current_user.owns?(@subject)
-  / = link_to unit.question, :url => edit_question_unit_path(unit), :method => :get, :html => { :id => 'unit_question' }, :remote => true
+  = link_to unit.question, :url => edit_question_unit_path(unit), :method => :get, :html => { :id => 'unit_question' }, :remote => true
 - else
   = unit.question
