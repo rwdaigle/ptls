@@ -1,0 +1,15 @@
+- expanded = false if not defined?(expanded)
+
+#question_wrapper
+  %em#progress
+    = progress
+  .clear
+  #question
+    %p#question_content= render :partial => 'units/show_question', :locals => { :unit => unit }
+  .clear
+  #hint{:class => (expanded ? 'expanded' : 'collapsed')}
+    = hint_bar_for(unit)
+  .clear
+  - if current_user.owns?(@subject)
+    %span#owner_actions
+      = link_to image_tag('delete_faded.png'), unit_path(unit), :method => :delete, :confirm => "Are you sure you want to delete this item AND all the progress made in relation to it?"

@@ -1,0 +1,4 @@
+- if current_user.owns?(@subject)
+  = link_to_remote unit.question, :url => edit_question_unit_path(unit), :method => :get, :html => { :id => 'unit_question' }
+- else
+  = unit.question

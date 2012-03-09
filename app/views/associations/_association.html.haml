@@ -1,0 +1,5 @@
+#association
+  - if association.new_record?
+    = render :partial => '/associations/edit', :locals => { :association => association }
+  - else
+    = render :partial => '/associations/show', :locals => { :association => association }
