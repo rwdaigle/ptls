@@ -32,6 +32,10 @@ class SessionsController < ApplicationController
     logout_killing_session!
     redirect_back_or_default('/', :notice => "You have been logged out.")
   end
+  
+  def start
+    logged_in? ? redirect_to(subjects_path) : redirect_to(new_session_path)
+  end
 
 protected
   # Track failed login attempts
