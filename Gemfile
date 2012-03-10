@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'unicorn'
 gem 'rails', '~> 3.2'
 gem 'rails_log_stdout'
 gem 'will_paginate'
