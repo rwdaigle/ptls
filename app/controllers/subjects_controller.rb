@@ -39,7 +39,8 @@ class SubjectsController < ApplicationController
   
   def quiz
     @subject = current_object
-    @units = @subject.units.learned_by(current_user).random(params[:seed]).paginate(:select => 'units.*', :page => params[:page], :per_page => 1)
+    Subject.seed(params[:seed])
+    @units = @subject.units.learned_by(current_user).random.paginate(:page => params[:page], :per_page => 1).all
     @units.empty? ? response_for(:quiz_complete) : response_for(:quiz)
   end
   
@@ -50,7 +51,7 @@ class SubjectsController < ApplicationController
   private
   
   def force_seed
-    redirect_to quiz_subject_path(current_object, :page => (params[:page] || 1), :seed => rand(100)) if
+    redirect_to quiz_subject_path(current_object, :page => (params[:page] || 1), :seed => rand()) if
       params[:seed].blank?    
   end
   

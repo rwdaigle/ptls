@@ -16,6 +16,6 @@ class Learning < ActiveRecord::Base
   # Named scopes
   scope :for, lambda { |subject| {:conditions => "units.subject_id = #{subject.id}", :joins => "LEFT JOIN units ON units.id = unit_id"}}
   scope :today, lambda { {:conditions => ['learnings.created_at > ? and learnings.created_at < ?', Time.zone.now.beginning_of_day, Time.zone.now.end_of_day]} }
-  scope :not_deferred, :conditions => {:deferred => false }  
+  scope :not_deferred, :conditions => { :deferred => false }  
   scope :recent, :order => 'learnings.created_at DESC, learnings.id DESC'    
 end

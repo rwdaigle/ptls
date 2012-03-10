@@ -55,7 +55,7 @@ module SubjectsHelper
   end
   
   def remaining_quiz
-    (count = @units.page_count - @units.current_page) <= 0 ?
+    (count = @units.total_pages - @units.current_page) <= 0 ?
       "final item" :
       "#{count} remaining"
   end

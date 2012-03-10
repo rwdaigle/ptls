@@ -8,6 +8,12 @@ class Subject < ActiveRecord::Base
   belongs_to :owner, :class_name => 'User'
   
   has_permalink :name
+
+  class << self
+    def seed(seed)
+      connection.execute(sanitize_sql(["SELECT SETSEED(?)", seed]))
+    end
+  end
   
   # Import the question and answers from the given file into this
   # subject

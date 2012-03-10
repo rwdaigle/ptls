@@ -22,14 +22,14 @@ class Unit < ActiveRecord::Base
   }
   
   scope :learned_by, lambda { |user|
-    { :joins => "LEFT JOIN learnings ON units.id = learnings.unit_id AND learnings.deferred = 0 AND learnings.user_id = #{user.id}",
+    { :joins => "LEFT JOIN learnings ON units.id = learnings.unit_id AND learnings.deferred = false AND learnings.user_id = #{user.id}",
       :conditions => "learnings.unit_id IS NOT NULL" }
   }
   
   scope :empty, :conditions => ["answer IS NULL OR answer = ''"]
   
-  # Get units in random order in a repeateable way (hence the seed)
-  scope :random, lambda { |seed| { :order => "RAND(#{seed || 1})" } }
+  # Get units in random order in a repeateable way (must do SETSEED(seed) first)
+  scope :random, { :order => "RANDOM()" }
   scope :ordered, { :order => 'units.position' }
 
   class << self
