@@ -27,8 +27,15 @@ Ptls::Application.routes.draw do
       get 'review'
       get 'quiz'
     end
-    resources :learnings, :collection => { :today => :get }
-    resources :reviews, :collection => { :missed => :get, :shift => :put }
+    resources :learnings do
+      get 'today', :on => :collection
+    end
+    resources :reviews do
+      collection do
+        get 'missed'
+        put 'shift'
+      end
+    end
   end
   
   # Niceities
