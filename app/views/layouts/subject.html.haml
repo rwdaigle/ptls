@@ -3,8 +3,9 @@
   %head
     %meta{:content=>"text/html; charset=utf-8", "http-equiv"=>"Content-Type"}/
     %title= yield(:title) || "PTLS Learning System"
-    = javascript_include_tag "jquery", "hotkeys", "hooks", "prototype", "hints", :cache => "cache/all"
+    = javascript_include_tag "jquery", "jquery_ujs", "hotkeys", "hooks", "prototype", "hints", :cache => "cache/all"
     = stylesheet_link_tag "reset", "layout", "subject", "unit", :cache => "cache/all"
+    = csrf_meta_tag
   %body    
     #page_wrapper
       #page

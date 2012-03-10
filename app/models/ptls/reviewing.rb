@@ -43,14 +43,14 @@ module Ptls
       def review_days_behind
         # Get the oldest unreviewed review
         oldest = reviews.left.first
-        oldest ? (Time.zone.today - oldest.scheduled_at.to_date) : 0
+        oldest ? (Time.zone.today - oldest.scheduled_at.to_date).to_i : 0
       end
     
       # If this user has missed their reviews for a number of days, shift them
       # all so they're not behind
       def shift_reviews
         if((days_behind = review_days_behind) > 0)
-          Review.update_all("scheduled_at = DATE_ADD(scheduled_at, INTERVAL #{days_behind} DAY)")
+          Review.update_all("scheduled_at = scheduled_at + INTERVAL '#{days_behind} days'")
         end
       end
     end
