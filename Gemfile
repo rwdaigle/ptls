@@ -15,6 +15,10 @@ gem 'jquery-rails'
 
 gem 'unicorn'
 
+group :produciton do
+  gem 'newrelic_rpm'
+end
+
 group :development do
   gem 'rspec-rails'
   gem 'heroku'
