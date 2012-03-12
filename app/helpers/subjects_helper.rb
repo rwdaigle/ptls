@@ -2,17 +2,17 @@ module SubjectsHelper
   
   def review_button(subject)
     if not current_user.review?(subject)
-      image_tag('/images/review_button_done.png')
+      image_tag('review_button_done.png')
     else
-      link_to(image_tag('/images/review_button.png'), review_subject_path(subject))
+      link_to(image_tag('review_button.png'), review_subject_path(subject))
     end
   end
   
   def learn_button(subject)
     if not current_user.learn?(subject)
-      image_tag('/images/learn_button_done.png')
+      image_tag('learn_button_done.png')
     else
-      link_to(image_tag('/images/learn_button.png'), learn_subject_path(subject))
+      link_to(image_tag('learn_button.png'), learn_subject_path(subject))
     end
   end
   

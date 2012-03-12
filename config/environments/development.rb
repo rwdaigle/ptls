@@ -26,7 +26,7 @@ Ptls::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
 
   # Rails 3.2
   config.active_record.mass_assignment_sanitizer = :strict

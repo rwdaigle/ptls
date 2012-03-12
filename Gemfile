@@ -10,12 +10,11 @@ gem 'make_resourceful'
 gem 'dynamic_form'
 
 gem 'haml'
-gem 'sass'
 gem 'jquery-rails'
 
 gem 'unicorn'
 
-group :produciton do
+group :production do
   gem 'newrelic_rpm'
 end
 
@@ -23,17 +22,16 @@ group :development do
   gem 'rspec-rails'
   gem 'heroku'
   gem 'foreman'
+  gem 'execjs'
 end
 
 group :test do
-  gem 'turn', '0.8.2', :require => false
-  gem 'scenarios'
+  gem 'rspec-rails'
 end
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails'
-  gem 'coffee-rails'
   gem 'uglifier'
 end

@@ -32,7 +32,7 @@ input.field
   padding-bottom: 10px
   padding-left: 1em
   margin-top: 25px
-  background: url('/images/hr_horizontal.png') bottom left repeat-x
+  background: url(<%= asset_path 'hr_horizontal.png' %>) bottom left repeat-x
   
 #header h1 > a
   float: left
@@ -85,7 +85,7 @@ input.field
   margin-bottom: 1em
   padding-top: 2em
   padding-left: 1em
-  background: url('/images/hr_horizontal.png') top left repeat-x
+  background: url(<%= asset_path 'hr_horizontal.png' %>) top left repeat-x
   
 #footer_links
   width: 26em
@@ -121,7 +121,7 @@ input.field
     
   .notice
     color: #6BC65F
-    background: url('/images/flag_instructions.png') top left no-repeat
+    background: url(<%= asset_path 'flag_instructions.png' %>) top left no-repeat
     a
       color: #B3A485
       text-decoration: none
@@ -129,7 +129,7 @@ input.field
   
   .error
     color: #CC3333
-    background: url('/images/flag_error.png') top left no-repeat
+    background: url(<%= asset_path 'flag_error.png' %>) top left no-repeat
     a
       color: #B3A485
       text-decoration: none

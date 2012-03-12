@@ -3,9 +3,8 @@
   %head
     %meta{:content=>"text/html; charset=utf-8", "http-equiv"=>"Content-Type"}/
     %title= yield(:title) || "PTLS Learning System"
-    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
-    = javascript_include_tag "jquery_ujs", "hotkeys", "hooks", "hints", :cache => "cache/all"
-    = stylesheet_link_tag "reset", "layout", "subject", "unit", :cache => "cache/all"
+    = javascript_include_tag "application"
+    = stylesheet_link_tag "application"
     = csrf_meta_tag
   %body    
     #page_wrapper
