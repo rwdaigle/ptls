@@ -20,8 +20,7 @@ class ReviewsController < ApplicationController
     
     response_for :missed_complete do |wants|
       wants.html do
-        flash[:notice] = "You've finished going through the reviews that you missed during today's review cycle. " +
-                         "<a href=\"#{missed_subject_reviews_path(@subject)}\">Click here</a> if you would like to do so again."
+        flash[:notice] = "You've finished going through the reviews that you missed during today's review cycle."
         redirect_to subject_path(@subject)
       end
     end

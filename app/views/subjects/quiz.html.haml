@@ -8,9 +8,7 @@
     %ul.unit_actions
       %li= link_to image_tag('next.png'), next_quiz_link, :key => 'n'
       
-  %p#show_answer.tab
-    %a.show{:href => '#answer', :hide => '#show_answer', :key => 's' }
-      %img{:src => '/images/show.png'} Show answer
+  = render 'units/answer_tab'
       
 - content_for :shortcuts do
   %h4 Keyboard shortcuts:

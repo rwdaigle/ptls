@@ -20,9 +20,7 @@
           = f.hidden_field :started_at, :value => Time.zone.now
           = image_submit_tag 'gotit.png'
       
-  %p#show_answer.tab
-    %a.show{:href => '#answer', :hide => '#show_answer', :key => 's' }
-      %img{:src => '/images/show.png'} Show answer
+  = render 'units/answer_tab'
       
 - content_for :shortcuts do
   %h4 Keyboard shortcuts:

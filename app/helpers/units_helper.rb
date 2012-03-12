@@ -25,7 +25,7 @@ module UnitsHelper
   end
   
   def remaining_todays_review
-    (count = @learnings.page_count - @learnings.current_page) <= 0 ?
+    (count = @learnings.total_pages - @learnings.current_page) <= 0 ?
       "final item" :
       "#{count} remaining"
   end

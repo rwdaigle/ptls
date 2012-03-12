@@ -11,11 +11,8 @@
         = form_for @review, :url => review_review_path(@review), :html => { :key => 'n' } do |f|
           = f.hidden_field :started_at, :value => Time.zone.now
           = hidden_field_tag :page, @reviews.current_page
-          = image_submit_tag 'next.png'
       
-  %p#show_answer.tab
-    %a.show{:href => '#answer', :hide => '#show_answer', :key => 's'}
-      %img{:src => '/images/show.png'} Show answer
+  = render 'units/answer_tab'
       
 - content_for :shortcuts do
   %h4 Keyboard shortcuts:
