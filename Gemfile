@@ -22,7 +22,6 @@ group :development do
   gem 'rspec-rails'
   gem 'heroku'
   gem 'foreman'
-  gem 'execjs'
 end
 
 group :test do

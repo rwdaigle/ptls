@@ -140,7 +140,6 @@ PLATFORMS
 
 DEPENDENCIES
   dynamic_form
-  execjs
   foreman
   haml
   heroku
