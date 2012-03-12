@@ -1,2 +1,0 @@
-page.replace_html :association, :partial => 'edit', :locals => { :association => @association }
-page[:association_body].select

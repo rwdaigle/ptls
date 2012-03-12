@@ -1,4 +1,4 @@
-= form_for association do |f|
+= form_for association, :remote => true do |f|
   = f.hidden_field :unit_id
   = f.text_field :body, :class => :field
   = image_submit_tag 'set_hint.png', :class => :button
