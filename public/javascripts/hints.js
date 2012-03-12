@@ -5,9 +5,9 @@ jQuery.fn.toggleHint = function() {
 jQuery.fn.editHint = function() {
   this.showHint();
   if(this.inEditHintMode()) {
-    $j('#association_body').focus().select();
+    $('#association_body').focus().select();
   } else {
-    $j('#edit_hint').click();
+    $('#edit_hint').click();
   }
 }
 

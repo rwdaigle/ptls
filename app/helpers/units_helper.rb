@@ -2,7 +2,7 @@ module UnitsHelper
   
   def hint_bar_for(unit)
     link_to_function(image_tag('hint.png'),
-      "$j('#hint').toggleHint();", :id => 'hint_tab', :key => 'h') +
+      "$('#hint').toggleHint();", :id => 'hint_tab', :key => 'h') +
       render(:partial => '/associations/association', :locals => { :association => current_user.association_for(unit) })
   end  
   

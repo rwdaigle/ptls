@@ -8,7 +8,7 @@
       = render :partial => 'units/show_answer', :locals => { :unit => @review.unit }
     %ul.unit_actions
       %li
-        - form_for @review, :url => review_review_path(@review), :html => { :key => 'n' } do |f|
+        = form_for @review, :url => review_review_path(@review), :html => { :key => 'n' } do |f|
           = f.hidden_field :started_at, :value => Time.zone.now
           = hidden_field_tag :page, @reviews.current_page
           = image_submit_tag 'next.png'
@@ -24,7 +24,7 @@
     %li Show/Hide hint: 'h'
     %li
       Add/Edit hint:
-      = link_to_function "'a'", "$j('#hint').editHint();", :key => 'a'
+      = link_to_function "'a'", "$('#hint').editHint();", :key => 'a'
     %li Next: 'n'
     %li Missed it: 'm'
     %li Quit: 'q'
