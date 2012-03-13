@@ -16,6 +16,7 @@ gem 'unicorn'
 
 group :production do
   gem 'newrelic_rpm'
+  gem 'lograge'
 end
 
 group :development do

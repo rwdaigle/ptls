@@ -55,6 +55,9 @@ GEM
     kgio (2.7.2)
     launchy (2.0.5)
       addressable (~> 2.2.6)
+    lograge (0.0.3)
+      actionpack
+      activesupport
     mail (2.4.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -144,6 +147,7 @@ DEPENDENCIES
   haml
   heroku
   jquery-rails
+  lograge
   make_resourceful
   newrelic_rpm
   permalink_fu
