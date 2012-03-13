@@ -8,6 +8,7 @@ gem 'permalink_fu'
 gem 'pg'
 gem 'make_resourceful'
 gem 'dynamic_form'
+gem 'wordnik'
 
 gem 'haml'
 gem 'jquery-rails'

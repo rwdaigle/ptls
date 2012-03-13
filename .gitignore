@@ -16,3 +16,5 @@
 
 *.dump
 config/database.yml
+
+.env

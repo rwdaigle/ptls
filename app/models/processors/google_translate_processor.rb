@@ -37,4 +37,18 @@ class Translation < ActiveResource::Base
     def key; 'ABQIAAAAy8pbLvXSAhT6CrI93EHftRRpqnpJsJmfW0aD3J1b_UKiNl32xRQTLRpqK7u0TlMjfg4G06CMTVh47g'; end
     
   end  
+
+  # # From subject impl
+  
+  # # Auto translate this subject's units using the Google language API
+  # # Force overwrite of existing answers by passing in <tt>true</tt>
+  # # to overwrite argument.
+  # def translate(overwrite = false)
+  #   (overwrite ? units : units.empty).each do |unit|
+  #     if (answer = Translation.translate(unit.question, :from => from, :to => to))
+  #       logger.info "Translating #{unit.question} -> #{answer}"
+  #       unit.update_attribute(:answer, answer)
+  #     end
+  #   end
+  # end
 end
