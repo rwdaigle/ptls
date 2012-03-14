@@ -1,4 +1,7 @@
-class QueueClassic < ActiveRecord::Migration
+require 'queue_classic'
+
+class QueueClassicFunctions < ActiveRecord::Migration
+
   def up
     db = QC::Database.new
     db.load_functions

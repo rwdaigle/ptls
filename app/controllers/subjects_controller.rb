@@ -49,7 +49,7 @@ class SubjectsController < ApplicationController
   def review; redirect_to_next_review; end
 
   def process_units
-    $process_queue << { subject_id: current_object.id }
+    $queue.enqueue('Subject.process!', current_object.id)
     flash[:notice] = "#{current_object} has been queued for processing of empty units."
     redirect_to current_object
   end

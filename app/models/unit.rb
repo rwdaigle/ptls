@@ -63,7 +63,7 @@ class Unit < ActiveRecord::Base
 
   def enqueue_for_processing
     if answer.blank?
-      $queue.enqueue('Subject.process_unit!', subject_id, self.id)
+      $queue.enqueue('Unit.process!', self.id)
     end
   end
 end
