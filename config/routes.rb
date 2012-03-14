@@ -26,10 +26,9 @@ Ptls::Application.routes.draw do
       get 'learn'
       get 'review'
       get 'quiz'
-      get 'process_units'
     end
     resources :units do
-      get 'process_all', :on => :collection
+      get 'queue', :on => :collection
     end
     resources :learnings do
       get 'today', :on => :collection

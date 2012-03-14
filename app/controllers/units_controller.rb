@@ -1,10 +1,10 @@
 class UnitsController < ApplicationController
 
-  before_filter :expose_subject_from_unit
+  before_filter :expose_subject_from_unit, :except => :queue
   before_filter :ensure_ownership, :only => [:edit_question, :edit_answer, :update, :destroy]
   
   make_resourceful do
-    actions :all, :edit_question
+    actions :all, :edit_question, :queue
     belongs_to :subject
     
     response_for :create do |wants|
@@ -42,6 +42,12 @@ class UnitsController < ApplicationController
     load_object
     current_object.update_attributes object_parameters
     response_for :update_question
+  end
+
+  def queue
+    $queue.enqueue('Subject.process!', parent_object.id)
+    flash[:notice] = "#{parent_object} has been queued for processing of empty units."
+    redirect_to parent_object
   end
   
   # Need to get subject by permalink
