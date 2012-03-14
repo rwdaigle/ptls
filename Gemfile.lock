@@ -69,8 +69,10 @@ GEM
     newrelic_rpm (3.3.2)
     nokogiri (1.5.2)
     permalink_fu (1.0.0)
-    pg (0.13.2)
+    pg (0.11.0)
     polyglot (0.3.3)
+    queue_classic (1.0.1)
+      pg (~> 0.11.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -163,6 +165,7 @@ DEPENDENCIES
   newrelic_rpm
   permalink_fu
   pg
+  queue_classic (~> 1.0.1)
   rails (~> 3.2)
   rails_log_stdout
   rspec-rails

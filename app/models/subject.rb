@@ -11,8 +11,19 @@ class Subject < ActiveRecord::Base
   has_permalink :name
 
   class << self
+
     def seed(seed)
       connection.execute(sanitize_sql(["SELECT SETSEED(?)", seed]))
+    end
+
+    def process!(subject_id, overwrite=false)
+      subject = self.find(subject_id)
+      subject.process!(overwrite) if subject
+    end
+
+    def process_unit!(subject_id, unit_id, overwrite=false)
+      subject = self.find(subject_id)
+      subject.process_unit!(unit_id, overwrite) if subject
     end
   end
 
@@ -22,6 +33,14 @@ class Subject < ActiveRecord::Base
       (overwrite ? units : units.empty).each do |unit|
         processor_klass.process!(self, unit)
       end
+    end
+  end
+
+  def process_unit!(unit_id, overwrite = false)
+    processor_klass = resolve_processor_class
+    unit = Unit.find(unit_id)
+    if processor_klass && unit
+      processor_klass.process!(self, unit) if unit.answer.blank? || overwrite 
     end
   end
   
@@ -38,7 +57,7 @@ class Subject < ActiveRecord::Base
       begin
         @resolved_processor_class ||= "#{unit_processor_type}_processor".classify.constantize
       rescue
-        logger.error "Unable to resolve processor class '#{unit_processor_type}' #{$!}"
+        logger.error "[Subject] event=error message=\"Unable to resolve processor class '#{unit_processor_type}' #{$!}\""
       end
     end
   end

@@ -1,0 +1,1 @@
+$queue = QC::Queue.new("queue_classic_jobs")

@@ -9,6 +9,8 @@ class Unit < ActiveRecord::Base
   has_many :learnings, :dependent => :delete_all
   has_many :reviews, :dependent => :delete_all
   has_many :associations, :dependent => :delete_all
+
+  after_create :enqueue_for_processing
   
   acts_as_list :scope => :subject
   
@@ -43,5 +45,11 @@ class Unit < ActiveRecord::Base
   
   def <=>(other)
     self.position <=> other.position
+  end
+
+  def enqueue_for_processing
+    if answer.blank?
+      $queue.enqueue('Subject.process_unit!', subject_id, self.id)
+    end
   end
 end
