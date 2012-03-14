@@ -20,28 +20,19 @@ class Subject < ActiveRecord::Base
       subject = self.find(subject_id)
       subject.process!(overwrite) if subject
     end
-
-    def process_unit!(subject_id, unit_id, overwrite=false)
-      subject = self.find(subject_id)
-      subject.process_unit!(unit_id, overwrite) if subject
-    end
   end
 
   def process!(overwrite = false)
-    processor_klass = resolve_processor_class
-    if processor_klass
+    with_processor do |processor_klass|
       (overwrite ? units : units.empty).each do |unit|
         processor_klass.process!(self, unit)
       end
     end
   end
 
-  def process_unit!(unit_id, overwrite = false)
+  def with_processor(&block)
     processor_klass = resolve_processor_class
-    unit = Unit.find(unit_id)
-    if processor_klass && unit
-      processor_klass.process!(self, unit) if unit.answer.blank? || overwrite 
-    end
+    yield processor_klass if processor_klass
   end
   
   # Override the param field to use in URIs

@@ -40,11 +40,25 @@ class Unit < ActiveRecord::Base
     # TODO: Find some way to patternize this
     def clean(scope = :all, opts = {})
       find(scope, {:select => 'units.*'}.merge(opts))
+    end    
+
+    def process!(unit_id, overwrite=false)
+      unit = self.find(unit_id)
+      unit.process!(overwrite) if unit
     end
+
   end
   
   def <=>(other)
     self.position <=> other.position
+  end
+
+  def process!(overwrite = false)
+    if answer.blank? || overwrite
+      subject.with_processor do |processor_klass|
+        processor_klass.process!(self, unit)
+      end
+    end
   end
 
   def enqueue_for_processing
