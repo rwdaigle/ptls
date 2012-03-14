@@ -39,7 +39,7 @@ class SubjectsController < ApplicationController
   
   def quiz
     @subject = current_object
-    Subject.seed(params[:seed])
+    Subject.seedRandom(params[:seed])
     @units = @subject.units.learned_by(current_user).random.paginate(:page => params[:page], :per_page => 1).all
     @units.empty? ? response_for(:quiz_complete) : response_for(:quiz)
   end

@@ -12,7 +12,7 @@ class Subject < ActiveRecord::Base
 
   class << self
 
-    def seed(seed)
+    def seedRandom(seed)
       connection.execute(sanitize_sql(["SELECT SETSEED(?)", seed]))
     end
 
