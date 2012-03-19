@@ -45,6 +45,7 @@ class UnitsController < ApplicationController
   end
 
   def queue
+    logger.info "[UnitsController] event=queue subject_id=#{parent_object.id} subject=\"#{parent_object}\""
     $queue.enqueue('Subject.process!', parent_object.id)
     flash[:notice] = "#{parent_object} has been queued for processing of empty units."
     redirect_to parent_object

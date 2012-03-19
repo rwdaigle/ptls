@@ -9,8 +9,6 @@ class Unit < ActiveRecord::Base
   has_many :learnings, :dependent => :delete_all
   has_many :reviews, :dependent => :delete_all
   has_many :associations, :dependent => :delete_all
-
-  after_create :enqueue_for_processing
   
   acts_as_list :scope => :subject
   
@@ -54,16 +52,14 @@ class Unit < ActiveRecord::Base
   end
 
   def process!(overwrite = false)
-    if answer.blank? || overwrite
-      subject.with_processor do |processor_klass|
-        processor_klass.process!(self, unit)
+    log(subject, self, "overwrite=#{overwrite}") do
+      if answer.blank? || overwrite
+        subject.with_processor do |processor_klass|
+          processor_klass.process!(self, unit)
+        end
       end
     end
   end
 
-  def enqueue_for_processing
-    if answer.blank?
-      $queue.enqueue('Unit.process!', self.id)
-    end
-  end
+  def to_log; "unit_id=#{self.id} unit=\"#{question}\""; end
 end
