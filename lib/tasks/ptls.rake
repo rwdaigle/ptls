@@ -21,7 +21,7 @@ namespace :ptls do
     # Get the file to filesystem
     puts "Importing words from #{ENV['VOCABULARY_CSV_URL']}"
     file = "tmp/#{Time.now.utc.to_i}-import.csv"
-    `wget -O #{file} "#{ENV['VOCABULARY_CSV_URL']}"`
+    `curl "#{ENV['VOCABULARY_CSV_URL']}" > #{file}`
 
     # Parse
     vocab = Subject.vocabulary
