@@ -5,4 +5,4 @@ handler do |job|
   $queue.enqueue(job)
 end
 
-every(30.seconds, "WordnikWODLoader.load!")
+every(12.hours, "WordnikWODLoader.load!")
