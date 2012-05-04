@@ -1,5 +1,4 @@
 require 'csv'
-require 'processors/wordnik_processor'
 
 class Subject < ActiveRecord::Base  
   
