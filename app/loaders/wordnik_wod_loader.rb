@@ -5,7 +5,7 @@ class WordnikWODLoader
   class << self
 
     def load!(from = Date.today)
-      subject = Subject.find(ENV['VOCABULARY_SUBJECT_ID'])
+      subject = Subject.vocabulary
       if(subject)
         today = Date.today
         while(from <= today)

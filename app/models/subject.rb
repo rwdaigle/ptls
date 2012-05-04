@@ -11,6 +11,10 @@ class Subject < ActiveRecord::Base
 
   class << self
 
+    def vocabulary
+      self.find(ENV['VOCABULARY_SUBJECT_ID'].to_i) if ENV['VOCABULARY_SUBJECT_ID']
+    end
+
     def seedRandom(seed)
       connection.execute(sanitize_sql(["SELECT SETSEED(?)", seed]))
     end
