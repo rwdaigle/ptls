@@ -7,7 +7,7 @@ class Subject < ActiveRecord::Base
   has_many :reviews, :through => :units, :source => :reviews
   belongs_to :owner, :class_name => 'User'
   
-  has_permalink :name
+  has_permalink :title
 
   class << self
 
