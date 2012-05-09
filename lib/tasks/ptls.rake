@@ -10,7 +10,7 @@ namespace :ptls do
 
   desc "Load words from external sources"
   task :load => :environment do
-    puts "Enqueuing WordnikWODLoader.load!"
+    # puts "Enqueuing WordnikWODLoader.load!"
     # $queue.enqueue("WordnikWODLoader.load!")
     WordnikWODLoader.load!(Date.today)
   end

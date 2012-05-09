@@ -23,7 +23,7 @@ module EventLogger
     end
 
     def event_logger
-      ActiveRecord::Base.logger
+      Rails.logger
     end
 
     # Stolen from ActionMailer, where this was used but was not made reusable
