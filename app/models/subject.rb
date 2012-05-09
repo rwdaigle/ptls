@@ -20,7 +20,7 @@ class Subject < ActiveRecord::Base
     end
 
     def process!(subject_id, overwrite=false)
-      log("subject_id=#{subject_id}", "overwrite=#{overwrite}") do
+      log({ subject_id: subject_id, overwrite: overwrite }) do
         subject = self.find(subject_id)
         subject.process!(overwrite) if subject
       end
@@ -46,7 +46,9 @@ class Subject < ActiveRecord::Base
   # Use name as to_s
   def to_s; title; end
 
-  def to_log; "subject_id=#{self.id} subject=\"#{self}\""; end
+  def to_log
+    { subject_id: self.id, subject: self.to_s }
+  end
 
   private
 
@@ -55,7 +57,7 @@ class Subject < ActiveRecord::Base
       begin
         @resolved_processor_class ||= "#{unit_processor_type}_processor".classify.constantize
       rescue
-        log("status=error", self, "message=\"Unable to resolve processor class '#{unit_processor_type}' #{$!}\"", "error=#{$!}")
+        # log({ status: error, self, "message=\"Unable to resolve processor class '#{unit_processor_type}' #{$!}\"", "error=#{$!}")
       end
     end
   end

@@ -19,16 +19,16 @@ namespace :ptls do
   task :import => :environment do
 
     # Get the file to filesystem
-    puts "Importing words from #{ENV['VOCABULARY_CSV_URL']}"
-    file = "tmp/#{Time.now.utc.to_i}-import.csv"
-    `curl "#{ENV['VOCABULARY_CSV_URL']}" > #{file}`
+    Object.log({event: "ptls:import", file: ENV['VOCABULARY_CSV_URL']}) do
+      # Rails.logger.info "Importing words from #{ENV['VOCABULARY_CSV_URL']}"
+      file = "tmp/#{Time.now.utc.to_i}-import.csv"
+      `curl "#{ENV['VOCABULARY_CSV_URL']}" > #{file}`
 
-    # Parse
-    vocab = Subject.vocabulary
-    CSV.foreach(file) do |row|
-      word = row[0]
-      puts "Importing \"#{word}\""
-      vocab.units.create(question: word)
+      # Parse
+      vocab = Subject.vocabulary
+      CSV.foreach(file) do |row|
+        vocab.units.create(question: row[0])
+      end
     end
   end
 end

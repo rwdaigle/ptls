@@ -17,10 +17,11 @@ class WordnikWODLoader
 
     def load_wod(subject, day)
       result = question = nil
-      log(subject, "day=\"#{day}\"") do
+      log(subject, day: day) do
         result = Wordnik.words.get_word_of_the_day(date: day.strftime("%Y-%m-%d"))
         question = result && !result.empty? ? result['word'] : nil
         existing_question = subject.units.where(question: question).first
+        log(subject, event: "wod", day: day, word: question, already_exists: !!existing_question)
         subject.units.create(question: question) unless existing_question
       end
     end
