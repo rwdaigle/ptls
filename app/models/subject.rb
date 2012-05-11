@@ -15,6 +15,16 @@ class Subject < ActiveRecord::Base
       self.find(ENV['VOCABULARY_SUBJECT_ID'].to_i) if ENV['VOCABULARY_SUBJECT_ID']
     end
 
+    def add_vocabulary_word(word)
+      subject = vocabulary
+      unit = subject.units.create(question: word)
+      if(unit && unit.valid?)
+        log({event: "add-word" }, unit, { status: "success" })
+      else
+        log({event: "add-word" }, unit, { status: "failure" }, { message: unit.errors.full_messages.join(", ") })
+      end
+    end
+
     def seedRandom(seed)
       connection.execute(sanitize_sql(["SELECT SETSEED(?)", seed]))
     end

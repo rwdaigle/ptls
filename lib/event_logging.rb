@@ -22,10 +22,10 @@ module EventLogger
     private
 
     def default_log_data
-      { timestamp: Time.now.utc.to_f, caller: called_from(2) }
+      { timestamp: Time.now.utc.to_f.round(5), source: source(2) }
     end
 
-    def called_from(depth=1)
+    def source(depth=1)
       caller_method = parse_caller(caller(depth+1).first).last
       klass = self.is_a?(Class) ? self.to_s : self.class.to_s
       "#{klass}##{caller_method}"

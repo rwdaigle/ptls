@@ -1,5 +1,3 @@
-
-
 namespace :ptls do
   
   desc "Auto translate the units of the SUBJECT_ID env variable"
