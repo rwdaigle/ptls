@@ -47,7 +47,7 @@ class Subject < ActiveRecord::Base
   def to_s; title; end
 
   def to_log
-    { subject_id: self.id, subject: self.to_s }
+    { subject_id: self.id, subject_title: self.title }
   end
 
   private
