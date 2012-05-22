@@ -40,6 +40,8 @@ Ptls::Application.routes.draw do
       end
     end
   end
+
+  resources :emails, :only => [:create]
   
   # Niceities
   match 'login', :to => 'sessions#new'
