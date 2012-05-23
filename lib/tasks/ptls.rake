@@ -8,8 +8,9 @@ namespace :ptls do
 
   desc "Load words from external sources"
   task :load => :environment do
-    [WordnikWODLoader, CSVLoader].each do |klass|
-      klass.load!
+    [WordnikWODLoader].each do |klass|    # CSVLoader
+      $queue.enqueue("#{klass.to_s}.load!")
+      # klass.load!
     end
   end
 end
