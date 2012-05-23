@@ -9,7 +9,7 @@ gem 'pg'
 gem 'make_resourceful'
 gem 'dynamic_form'
 gem 'wordnik'
-gem 'queue_classic', '~> 1.0.1'
+gem 'queue_classic', '~> 2.0.0'
 gem 'clockwork'
 
 gem 'haml'

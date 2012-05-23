@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120314004517) do
+ActiveRecord::Schema.define(:version => 20120523005513) do
 
   create_table "associations", :force => true do |t|
     t.integer "user_id", :null => false
@@ -34,9 +34,13 @@ ActiveRecord::Schema.define(:version => 20120314004517) do
   add_index "learnings", ["user_id"], :name => "index_learnings_on_user_id"
 
   create_table "queue_classic_jobs", :force => true do |t|
-    t.text     "details"
+    t.string   "q_name"
+    t.string   "method"
+    t.text     "args"
     t.datetime "locked_at"
   end
+
+  add_index "queue_classic_jobs", ["q_name", "id"], :name => "idx_qc_on_name_only_unlocked"
 
   create_table "reviews", :force => true do |t|
     t.integer  "user_id",                         :null => false
