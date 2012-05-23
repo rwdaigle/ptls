@@ -4,6 +4,8 @@ class Unit < ActiveRecord::Base
   
   validates_presence_of :question, :subject
   validates_uniqueness_of :question, :scope => :subject_id
+
+  before_save :normalize_question
   
   belongs_to :subject
   has_many :learnings, :dependent => :delete_all
@@ -63,5 +65,9 @@ class Unit < ActiveRecord::Base
 
   def to_log
     { unit_id: self.id, unit: question }
+  end
+
+  def normalize_question
+    self.question = question.strip.downcase if question
   end
 end
