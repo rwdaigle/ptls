@@ -5,7 +5,7 @@ class CSVLoader
   class << self
 
     def load!
-      log({event: "csv-import", url: ENV['VOCABULARY_CSV_URL']}) do
+      log({action: "csv-import", url: ENV['VOCABULARY_CSV_URL']}) do
 
         file = "tmp/#{Time.now.utc.to_f}-import.csv"
         `curl -q "#{ENV['VOCABULARY_CSV_URL']}" > #{file}`
