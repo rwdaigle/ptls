@@ -6,11 +6,20 @@ module EventLogger
 
   module ClassMethods
 
+    def log_context(*segments, &block)
+      Scrolls.context(log_data_from(*segments), &block)
+    end
+
     def log(*segments, &block)
-      call_log_data = segments.inject({}) do |map, segment|
+      Scrolls.log(log_data_from(*segments), &block)
+    end
+
+    private
+
+    def log_data_from(*segments)
+      segments.inject({}) do |map, segment|
         map.merge!(segment.to_log)
       end
-      Scrolls.log(call_log_data, &block)
     end
 
   end

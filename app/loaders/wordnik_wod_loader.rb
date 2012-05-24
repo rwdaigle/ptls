@@ -5,10 +5,12 @@ class WordnikWODLoader
   class << self
 
     def load!(from = Date.today)
-      today = Date.today
-      while(from <= today)
-        load_wod(from)
-        from = from + 1.day
+      log_context({user: 'ryan', user_id: 1}) do
+        today = Date.today
+        while(from <= today)
+          load_wod(from)
+          from = from + 1.day
+        end
       end
     end
 
