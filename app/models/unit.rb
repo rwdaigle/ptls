@@ -54,7 +54,7 @@ class Unit < ActiveRecord::Base
   end
 
   def process!(overwrite = false)
-    log(subject, self, { overwrite: overwrite }) do
+    log(subject, self, { 'overwrite' => overwrite }) do
       if answer.blank? || overwrite
         subject.with_processor do |processor_klass|
           processor_klass.process!(self, unit)
@@ -64,7 +64,7 @@ class Unit < ActiveRecord::Base
   end
 
   def to_log
-    { unit_id: self.id, unit: question }
+    { 'unit_id' => self.id, 'unit' => question }
   end
 
   def normalize_question

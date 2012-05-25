@@ -5,18 +5,16 @@ class WordnikWODLoader
   class << self
 
     def load!(from = Date.today)
-      log_context({user: 'ryan', user_id: 1}) do
-        today = Date.today
-        while(from <= today)
-          load_wod(from)
-          from = from + 1.day
-        end
+      today = Date.today
+      while(from <= today)
+        load_wod(from)
+        from = from + 1.day
       end
     end
 
     def load_wod(day)
       result = question = nil
-      log({action: "wod-import", day: day}) do
+      log({'action' => "wod-import", 'day' => day.to_s}) do
         result = Wordnik.words.get_word_of_the_day(date: day.strftime("%Y-%m-%d"))
         word = result && !result.empty? ? result['word'] : nil
         Subject.add_vocabulary_word(word)

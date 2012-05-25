@@ -11,13 +11,14 @@ gem 'dynamic_form'
 gem 'wordnik'
 gem 'queue_classic', '~> 2.0.0'
 gem 'clockwork'
-gem 'scrolls'
+gem 'stathat'
 
 gem 'haml'
 gem 'jquery-rails'
 
 gem 'unicorn'
 gem 'lograge'
+gem 'scrolls'
 
 group :production do
   gem 'newrelic_rpm'

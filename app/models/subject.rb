@@ -19,9 +19,9 @@ class Subject < ActiveRecord::Base
       subject = vocabulary
       unit = subject.units.create(question: word)
       if(unit && unit.valid?)
-        log({action: "add-word" }, unit, { status: "success" })
+        log({'action' => "add-word" }, unit, { 'status' => "success" })
       else
-        log({action: "add-word" }, unit, { status: "failure" }, { message: unit.errors.full_messages.join(", ") })
+        log({'action' => "add-word" }, unit, { 'status' => "failure" }, { 'message' => unit.errors.full_messages.join(", ") })
       end
     end
 
@@ -30,7 +30,7 @@ class Subject < ActiveRecord::Base
     end
 
     def process!(subject_id, overwrite=false)
-      log({ subject_id: subject_id, overwrite: overwrite }) do
+      log({ 'subject_id' => subject_id, 'overwrite' => overwrite }) do
         subject = self.find(subject_id)
         subject.process!(overwrite) if subject
       end
@@ -57,7 +57,7 @@ class Subject < ActiveRecord::Base
   def to_s; title; end
 
   def to_log
-    { subject_id: self.id, subject_title: self.title }
+    { 'subject_id' => self.id, 'subject_title' => self.title }
   end
 
   private
@@ -67,7 +67,7 @@ class Subject < ActiveRecord::Base
       begin
         @resolved_processor_class ||= "#{unit_processor_type}_processor".classify.constantize
       rescue
-        # log({ status: error, self, "message=\"Unable to resolve processor class '#{unit_processor_type}' #{$!}\"", "error=#{$!}")
+        # log({ 'status' => error, self, "message=\"Unable to resolve processor class '#{unit_processor_type}' #{$!}\"", "error=#{$!}")
       end
     end
   end

@@ -11,7 +11,16 @@ module EventLogger
     end
 
     def log(*segments, &block)
-      Scrolls.log(log_data_from(*segments), &block)
+      log_data = log_data_from(*segments)
+
+      # Would use Scrolls to execute block but wouldn't have 'elapsed' in log_data for log receivers
+      if block_given?
+        elapsed_ms = Benchmark.ms { yield }
+        log_data.merge!({ 'elapsed' => elapsed_ms.round(2) })
+      end
+
+      Scrolls.log(log_data)
+      $queue.enqueue('LogReceiver.receive', log_data) # Send it off for archival, forwarding, whatever.
     end
 
     private
