@@ -17,6 +17,7 @@ class LogReceiver
         lambda { |action, log_data|
           if(action == 'wod-import')
             stat_hat_post_performance(StatHatConfig::EVENT_IMPORT_WOD_WORDNIK_PERFORMANCE, log_data)
+            stat_hat_post_increment(StatHatConfig::EVENT_IMPORT_WOD_WORDNIK_REQUEST)
           end
         },
 
@@ -24,6 +25,7 @@ class LogReceiver
         lambda { |action, log_data|
           if(action == 'email-import')
             stat_hat_post_performance(StatHatConfig::EVENT_IMPORT_EMAIL_PERFORMANCE, log_data)
+            stat_hat_post_increment(StatHatConfig::EVENT_IMPORT_EMAIL_REQUEST)
           end
         }
       ]
@@ -34,6 +36,11 @@ class LogReceiver
         Scrolls.log({'action' => 'stathat-post-value', 'event' => event, 'value' => value})
         StatHat::API.ez_post_value(event, ENV['STAT_HAT_KEY'], value)
       end
+    end
+
+    def stat_hat_post_increment(event, increment = 1)
+      Scrolls.log({'action' => 'stathat-post-counter', 'event' => event, 'value' => increment})
+      StatHat::API.ez_post_count(event, ENV['STAT_HAT_KEY'], increment)
     end
   end
 end
