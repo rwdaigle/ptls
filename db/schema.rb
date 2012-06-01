@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120523005513) do
+ActiveRecord::Schema.define(:version => 20120601202329) do
 
   create_table "associations", :force => true do |t|
     t.integer "user_id", :null => false
@@ -78,9 +78,9 @@ ActiveRecord::Schema.define(:version => 20120523005513) do
 
   create_table "units", :force => true do |t|
     t.string   "question",   :null => false
-    t.string   "answer"
+    t.text     "answer"
     t.integer  "subject_id", :null => false
-    t.integer  "position",   :null => false
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
