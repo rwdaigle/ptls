@@ -6,6 +6,7 @@ class Unit < ActiveRecord::Base
   validates_uniqueness_of :question, :scope => :subject_id
 
   before_save :normalize_question
+  after_create :process!
   
   belongs_to :subject
   has_many :learnings, :dependent => :delete_all
@@ -54,13 +55,7 @@ class Unit < ActiveRecord::Base
   end
 
   def process!(overwrite = false)
-    log(subject, self, { 'overwrite' => overwrite }) do
-      if answer.blank? || overwrite
-        subject.with_processor do |processor_klass|
-          processor_klass.process!(self, unit)
-        end
-      end
-    end
+    $queue.enqueue("WordnikProcessor.process!", id) if answer.blank? || overwrite
   end
 
   def to_log
