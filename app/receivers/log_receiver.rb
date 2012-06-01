@@ -27,7 +27,7 @@ class LogReceiver
             stat_hat_post_performance(StatHatConfig::EVENT_IMPORT_EMAIL_PERFORMANCE, log_data)
             stat_hat_post_increment(StatHatConfig::EVENT_IMPORT_EMAIL_REQUEST)
           end
-        }
+        },
 
         # EVENT_PROCESS_WORDNIK
         lambda { |action, log_data|
