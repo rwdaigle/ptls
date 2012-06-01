@@ -30,25 +30,22 @@ class Subject < ActiveRecord::Base
     end
 
     def process!(subject_id, overwrite=false)
-      log({ 'subject_id' => subject_id, 'overwrite' => overwrite }) do
-        subject = self.find(subject_id)
-        subject.process!(overwrite) if subject
-      end
+      subject = self.find(subject_id)
+      subject.process!(overwrite) if subject
     end
   end
 
   def process!(overwrite = false)
-    with_processor do |processor_klass|
-      (overwrite ? units : units.empty).each do |unit|
-        processor_klass.process!(self, unit)
-      end
+    (overwrite ? units : units.empty).each do |unit|
+      $queue.enqueue("WordnikProcessor.process!", unit.id)
     end
   end
 
-  def with_processor(&block)
-    processor_klass = resolve_processor_class
-    yield processor_klass if processor_klass
-  end
+  # # Processors are now unit-specific
+  # def with_processor(&block)
+  #   processor_klass = resolve_processor_class
+  #   yield processor_klass if processor_klass
+  # end
   
   # Override the param field to use in URIs
   def to_param; permalink; end
