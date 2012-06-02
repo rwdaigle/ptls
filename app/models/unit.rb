@@ -5,7 +5,7 @@ class Unit < ActiveRecord::Base
   validates_presence_of :question, :subject
   validates_uniqueness_of :question, :scope => :subject_id
 
-  before_save :normalize_question
+  before_save :normalize_question, :set_processor_type
   after_create :process!
   
   belongs_to :subject
@@ -43,9 +43,8 @@ class Unit < ActiveRecord::Base
       find(scope, {:select => 'units.*'}.merge(opts))
     end    
 
-    def process!(unit_id, overwrite=false)
-      unit = self.find(unit_id)
-      unit.process!(overwrite) if unit
+    def process!(unit_id, overwrite = false)
+      find(unit_id).try(:process!, overwrite)
     end
 
   end
@@ -54,8 +53,16 @@ class Unit < ActiveRecord::Base
     self.position <=> other.position
   end
 
+  def empty?
+    answer.blank?
+  end
+
   def process!(overwrite = false)
-    $queue.enqueue("WordnikProcessor.process!", id) if answer.blank? || overwrite
+    if overwrite || empty?
+      with_processor do |processor_klass|
+        $queue.enqueue("#{processor_klass}.process!", id)
+      end
+    end
   end
 
   def to_log
@@ -64,5 +71,26 @@ class Unit < ActiveRecord::Base
 
   def normalize_question
     self.question = question.strip.downcase if question
+  end
+
+  def set_processor_type
+    self.processor_type = "Wordnik" unless processor_type
+  end
+
+  def with_processor(&block)
+    processor_klass = resolve_processor_class
+    yield processor_klass if processor_klass
+  end
+
+  private
+
+  def resolve_processor_class
+    if(processor_type)
+      begin
+        @resolved_processor_class ||= "#{processor_type}_processor".classify.constantize
+      rescue
+        # log({ 'status' => error, self, "message=\"Unable to resolve processor class '#{unit_processor_type}' #{$!}\"", "error=#{$!}")
+      end
+    end
   end
 end

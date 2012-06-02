@@ -37,15 +37,9 @@ class Subject < ActiveRecord::Base
 
   def process!(overwrite = false)
     (overwrite ? units : units.empty).each do |unit|
-      $queue.enqueue("WordnikProcessor.process!", unit.id)
+      unit.process!(overwrite)
     end
   end
-
-  # # Processors are now unit-specific
-  # def with_processor(&block)
-  #   processor_klass = resolve_processor_class
-  #   yield processor_klass if processor_klass
-  # end
   
   # Override the param field to use in URIs
   def to_param; permalink; end
@@ -57,27 +51,4 @@ class Subject < ActiveRecord::Base
     { 'subject_id' => self.id, 'subject_title' => self.title }
   end
 
-  private
-
-  def resolve_processor_class
-    if(unit_processor_type)
-      begin
-        @resolved_processor_class ||= "#{unit_processor_type}_processor".classify.constantize
-      rescue
-        # log({ 'status' => error, self, "message=\"Unable to resolve processor class '#{unit_processor_type}' #{$!}\"", "error=#{$!}")
-      end
-    end
-  end
-
 end
-
-  # Old implementation
-  #
-  # # Import the question and answers from the given file into this
-  # # subject
-  # def import(file)
-  #   CSV::Reader.parse(File.open(file)).each do |row|
-  #     logger.info "Importing #{row[0]} -> #{row[1]}"
-  #     units.find_or_create_by_question_and_answer(row[0], row[1])
-  #   end
-  # end

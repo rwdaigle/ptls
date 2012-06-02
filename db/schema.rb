@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120601202329) do
+ActiveRecord::Schema.define(:version => 20120602003006) do
 
   create_table "associations", :force => true do |t|
     t.integer "user_id", :null => false
@@ -63,26 +63,24 @@ ActiveRecord::Schema.define(:version => 20120601202329) do
   add_index "reviews", ["user_id"], :name => "index_reviews_on_user_id"
 
   create_table "subjects", :force => true do |t|
-    t.string   "permalink",           :null => false
-    t.string   "from"
-    t.string   "to"
+    t.string   "permalink",  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title",               :null => false
+    t.string   "title",      :null => false
     t.integer  "owner_id"
-    t.string   "unit_processor_type"
   end
 
   add_index "subjects", ["owner_id"], :name => "index_subjects_on_owner_id"
   add_index "subjects", ["permalink"], :name => "index_subjects_on_permalink"
 
   create_table "units", :force => true do |t|
-    t.string   "question",   :null => false
+    t.string   "question",       :null => false
     t.text     "answer"
-    t.integer  "subject_id", :null => false
+    t.integer  "subject_id",     :null => false
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "processor_type"
   end
 
   add_index "units", ["position"], :name => "index_units_on_position"
