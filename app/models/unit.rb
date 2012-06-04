@@ -6,7 +6,6 @@ class Unit < ActiveRecord::Base
   validates_uniqueness_of :question, :scope => :subject_id
 
   before_save :normalize_question, :set_processor_type
-  after_create :process!
   
   belongs_to :subject
   has_many :learnings, :dependent => :delete_all
@@ -60,7 +59,7 @@ class Unit < ActiveRecord::Base
   def process!(overwrite = false)
     if overwrite || empty?
       with_processor do |processor_klass|
-        $queue.enqueue("#{processor_klass}.process!", id)
+        processor_klass.process!(id)
       end
     end
   end
