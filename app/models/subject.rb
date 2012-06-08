@@ -1,5 +1,3 @@
-require 'csv'
-
 class Subject < ActiveRecord::Base  
   
   validates_presence_of :title, :permalink
@@ -19,9 +17,9 @@ class Subject < ActiveRecord::Base
       subject = vocabulary
       unit = subject.units.create(question: word)
       if(unit && unit.valid?)
-        log({'action' => "add-word" }, unit, { 'status' => "success" })
+        log({'action' => Event::UNIT_ADD }, unit)
       else
-        log({'action' => "add-word" }, unit, { 'status' => "failure" }, { 'message' => unit.errors.full_messages.join(", ") })
+        log({'action' => Event::UNIT_ADD }, unit, { 'status' => 'error', 'message' => unit.errors.full_messages.join(", ") })
       end
     end
 
