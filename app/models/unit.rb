@@ -1,4 +1,6 @@
 class Unit < ActiveRecord::Base
+
+  MAX_PROCESS_COUNT = 2
   
   include Comparable
   
@@ -33,6 +35,7 @@ class Unit < ActiveRecord::Base
   # Get units in random order in a repeateable way (must do SETSEED(seed) first)
   scope :random, { :order => "RANDOM()" }
   scope :ordered, { :order => 'units.position' }
+  scope :processable, { :conditions => ["process_count <= ?", MAX_PROCESS_COUNT] }
 
   class << self
 
@@ -57,11 +60,15 @@ class Unit < ActiveRecord::Base
   end
 
   def process!(overwrite = false)
-    if overwrite || empty?
+    if (overwrite || empty?) && !max_process_count?
       with_processor do |processor_klass|
         processor_klass.process!(id)
       end
     end
+  end
+
+  def max_process_count?
+    process_count > MAX_PROCESS_COUNT
   end
 
   def to_log

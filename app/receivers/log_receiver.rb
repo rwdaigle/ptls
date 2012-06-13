@@ -3,9 +3,11 @@ class LogReceiver
   class << self
 
     def receive(log_data)
-      if(log_data)
-        receivers.each do |receiver|
-          receiver.call(log_data['action'], log_data)
+      if Rails.env.production?
+        if(log_data)
+          receivers.each do |receiver|
+            receiver.call(log_data['action'], log_data)
+          end
         end
       end
     end

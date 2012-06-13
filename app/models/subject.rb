@@ -34,7 +34,7 @@ class Subject < ActiveRecord::Base
   end
 
   def process!(overwrite = false)
-    (overwrite ? units : units.empty).each do |unit|
+    (overwrite ? units.processable : units.processable.empty).each do |unit|
       unit.process!(overwrite)
     end
   end
