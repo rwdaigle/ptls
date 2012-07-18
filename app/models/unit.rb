@@ -7,7 +7,7 @@ class Unit < ActiveRecord::Base
   validates_presence_of :question, :subject
   validates_uniqueness_of :question, :scope => :subject_id
 
-  before_save :normalize_question, :set_processor_type
+  before_validation :normalize_question, :set_processor_type
   
   belongs_to :subject
   has_many :learnings, :dependent => :delete_all
